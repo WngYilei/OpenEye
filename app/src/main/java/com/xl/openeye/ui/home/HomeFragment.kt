@@ -3,12 +3,16 @@ package com.xl.openeye.ui.home
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hjq.bar.OnTitleBarListener
 import com.hjq.bar.TitleBar
 import com.xl.openeye.databinding.HomeFragmentBinding
+import com.xl.openeye.itemcell.BannerItem
 import com.xl.openeye.itemcell.HomeVideoItem
+import com.xl.openeye.itemcell.TextHeaderItem
+import com.xl.openeye.utils.StringUtils
 import com.xl.xl_base.adapter.image.ImageLoader
 import com.xl.xl_base.adapter.item.ItemCell
 import com.xl.xl_base.adapter.recycler.*
@@ -22,9 +26,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::inflate) {
 
     private val viewModel by viewModels<HomeViewModel>()
-    private var page = 0
-    private lateinit var bannserAdapter: RecyclerAdapter
+
     private lateinit var recyclerAdapter: StableAdapter
+    private var date: String = ""
+    private var num: String = "1"
     override fun onFragmentCreate(savedInstanceState: Bundle?) {
 
         viewBinding.titlebar.setOnTitleBarListener(object : OnTitleBarListener {
@@ -37,19 +42,17 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
 
         viewBinding.smartRefresh.onSmartRefreshCallback {
             onRefresh {
-                page = 0
-                viewModel.getHome(0)
+                num = "0"
+                viewModel.getHome(1)
             }
             onLoadMore {
-                page += 1
-                viewModel.getHome(page)
+                viewModel.getNextHome(date, num)
             }
         }
 
         recyclerAdapter = createStableAdapter {
             imageLoader = ImageLoader(this@HomeFragment)
         }
-
 
 
         viewBinding.recycle.apply {
@@ -64,21 +67,36 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
             )
         }
 
-        viewModel.state.collectHandlerFlow(this) {
+
+        viewModel.state.collectHandlerFlow(this) { state ->
 
             viewBinding.smartRefresh.finishRefresh()
             viewBinding.smartRefresh.finishLoadMore()
 
-
-            it.homeInfo?.let {
+            state.homeInfo?.let { it ->
+                val map = StringUtils.getUrl(it.nextPageUrl)
+                date = map["date"]!!
+                num = map["num"]!!
                 val items = mutableListOf<ItemCell>()
+                if (state.refresh) {
+                    items.add(
+                        BannerItem(
+                            activity as AppCompatActivity,
+                            it.issueList[0].itemList
+                        ),
+                    )
+                    items.add(TextHeaderItem("开眼看世界"))
+
+                }
                 it.issueList[0].itemList.forEach {
                     if (it.type == "video") {
                         items.add(HomeVideoItem(it.data))
+                    } else if (it.type == "textHeader") {
+                        items.add(TextHeaderItem(it.data.text))
                     }
                 }
                 items.size.let { it1 ->
-                    recyclerAdapter.submitList(it1, items, page == 0)
+                    recyclerAdapter.submitList(it1, items, state.refresh)
                 }
             }
         }

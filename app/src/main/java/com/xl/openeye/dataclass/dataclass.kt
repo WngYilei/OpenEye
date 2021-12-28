@@ -77,6 +77,7 @@ data class Data(
     val title: String,
     val titlePgc: String,
     val type: String,
+    val text:String,
     val videoPosterBean: Any,
     val waterMarks: Any,
     val webAdTrack: Any,

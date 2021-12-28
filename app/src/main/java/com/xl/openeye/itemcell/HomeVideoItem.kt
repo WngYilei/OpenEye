@@ -1,5 +1,6 @@
 package com.xl.openeye.itemcell
 
+import android.util.Log
 import android.view.View
 import com.xl.openeye.R
 import com.xl.openeye.dataclass.Data
@@ -36,7 +37,7 @@ class HomeVideoItem(val data: Data) : ItemCell {
 
             support.imageLoader?.displayAvatar(
                 itemView.item_img_author,
-                if (cell.data.author == null) cell.data.provider.icon else cell.data.author.icon,
+                cell.data.author.icon,
             )
         }
     }

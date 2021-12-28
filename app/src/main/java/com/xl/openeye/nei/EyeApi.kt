@@ -10,4 +10,6 @@ interface EyeApi {
     @GET("/api/v2/feed")
     suspend fun getHomeData(@Query("num") num: String): HomeInfo
 
+    @GET("/api/v2/feed")
+    suspend fun getNextHomePage(@Query("date") data: String, @Query("num") num: String): HomeInfo
 }
