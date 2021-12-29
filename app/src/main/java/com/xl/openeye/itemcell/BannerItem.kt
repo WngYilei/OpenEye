@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.item_banner.view.*
 import com.bumptech.glide.Glide
 import com.xl.openeye.dataclass.Item
 
+
 import com.youth.banner.adapter.BannerImageAdapter
 import com.youth.banner.holder.BannerImageHolder
 import com.youth.banner.indicator.CircleIndicator

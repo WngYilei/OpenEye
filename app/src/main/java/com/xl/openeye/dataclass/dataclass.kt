@@ -45,7 +45,7 @@ data class Data(
     val descriptionPgc: String,
     val duration: Int,
     val favoriteAdTrack: Any,
-    val header: Any,
+    val header: Header,
     val id: Int,
     val idx: Int,
     val ifLimitVideo: Boolean,
@@ -77,12 +77,35 @@ data class Data(
     val title: String,
     val titlePgc: String,
     val type: String,
-    val text:String,
+    val text: String,
     val videoPosterBean: Any,
     val waterMarks: Any,
     val webAdTrack: Any,
-    val webUrl: WebUrl
+    val webUrl: WebUrl,
+
+    val count: Int,
+
+    val footer: Any,
+
+    val itemList: List<Item>
 )
+
+data class Header(
+    val actionUrl: String,
+    val adTrack: Any,
+    val description: String,
+    val expert: Boolean,
+    val follow: Follow,
+    val icon: String,
+    val iconType: String,
+    val id: Int,
+    val ifPgc: Boolean,
+    val ifShowNotificationIcon: Boolean,
+    val subTitle: Any,
+    val title: String,
+    val uid: Int
+)
+
 
 data class Author(
     val adTrack: Any,
@@ -170,3 +193,8 @@ data class Url(
     val size: Int,
     val url: String
 )
+
+
+
+
+

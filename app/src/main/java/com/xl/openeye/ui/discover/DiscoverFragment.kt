@@ -32,7 +32,6 @@ class DiscoverFragment : BaseFragment<DiscoverFragmentBinding>(DiscoverFragmentB
         fragments.add(SpecialFragment.newInstance())
         fragments.add(InfoMationFragment.newInstance())
         fragments.add(RecommendFragment.newInstance())
-
     }
 
     companion object {

@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: DataRepository) :
-    ReduxViewModel<ViewState>(ViewState()) {
+    ReduxViewModel<ViewState>(ViewState(isFirst = true)) {
     fun getHome(index: Int) {
         setState {
             copy(loading = true, refresh = true, homeInfo = null)

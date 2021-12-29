@@ -250,7 +250,7 @@ class BottomBar : View {
             MotionEvent.ACTION_DOWN -> target = withinWhichArea(event.x.toInt())
             MotionEvent.ACTION_UP -> {
                 if (event.y >= 0 && target == withinWhichArea(event.x.toInt())) {
-                    listen(target)
+//                    listen(target)
                     switchFragment(target)
                     currentIndex = target
                     invalidate()

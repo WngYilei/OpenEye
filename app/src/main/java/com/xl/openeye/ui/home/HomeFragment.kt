@@ -70,10 +70,10 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
 
         viewModel.state.collectHandlerFlow(this) { state ->
 
-            viewBinding.smartRefresh.finishRefresh()
-            viewBinding.smartRefresh.finishLoadMore()
-
             state.homeInfo?.let { it ->
+                viewBinding.smartRefresh.finishRefresh()
+                viewBinding.smartRefresh.finishLoadMore()
+
                 val map = StringUtils.getUrl(it.nextPageUrl)
                 date = map["date"]!!
                 num = map["num"]!!
