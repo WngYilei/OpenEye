@@ -195,6 +195,57 @@ data class Url(
 )
 
 
+data class CategoryInfoItem(
+    val alias: Any,
+    val bgColor: String,
+    val bgPicture: String,
+    val defaultAuthorId: Int,
+    val description: String,
+    val headerImage: String,
+    val id: Int,
+    val name: String,
+    val tagId: Int
+)
+
+
+
+data class Toppics(
+    val adExist: Boolean,
+    val count: Int,
+    val itemList: List<ToppocItem>,
+    val nextPageUrl: String,
+    val total: Int
+)
+
+data class ToppocItem(
+    val adIndex: Int,
+    val `data`: ToppicData,
+    val id: Int,
+    val tag: Any,
+    val trackingData: Any,
+    val type: String
+)
+
+data class ToppicData(
+    val actionUrl: String,
+    val adTrack: List<Any>,
+    val autoPlay: Boolean,
+    val dataType: String,
+    val description: String,
+    val header: Any,
+    val id: Int,
+    val image: String,
+    val label: Label,
+    val labelList: List<Any>,
+    val shade: Boolean,
+    val title: String
+)
+
+data class Label(
+    val card: String,
+    val detail: Any,
+    val text: String
+)
 
 
 

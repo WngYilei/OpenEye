@@ -1,7 +1,10 @@
 package com.xl.openeye.nei
 
+
+import com.xl.openeye.dataclass.CategoryInfoItem
 import com.xl.openeye.dataclass.FollowInfo
 import com.xl.openeye.dataclass.HomeInfo
+import com.xl.openeye.dataclass.Toppics
 import com.xl.xl_base.api.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -22,4 +25,10 @@ interface EyeApi {
         @Query("follow") follow: Boolean = false,
         @Query("startId") startId: String = "0"
     ): FollowInfo
+
+    @GET("/api/v4/categories")
+    suspend fun getType(): List<CategoryInfoItem>
+
+    @GET("/api/v3/specialTopics")
+    suspend fun getToppic(@Query("start") start: String, @Query("num") num: String = "10"): Toppics
 }

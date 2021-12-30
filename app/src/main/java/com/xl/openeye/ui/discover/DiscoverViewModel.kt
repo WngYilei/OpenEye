@@ -1,6 +1,5 @@
 package com.xl.openeye.ui.discover
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.xl.openeye.repository.DataRepository
 import com.xl.openeye.state.ViewState
@@ -20,7 +19,34 @@ class DiscoverViewModel @Inject constructor(var repository: DataRepository) :
         viewModelScope.launch {
             val data = repository.getFollow(num)
             setState {
-                copy(loading = true, refresh = true, followInfo = data,homeInfo = null)
+                copy(loading = true, refresh = true, followInfo = data, homeInfo = null)
+            }
+        }
+    }
+
+    fun getType() {
+        setState {
+            copy(loading = true, refresh = true, categoryInfo = null)
+        }
+
+        viewModelScope.launch {
+            val data = repository.getType()
+            setState {
+                copy(loading = false, refresh = false, categoryInfo = data)
+            }
+        }
+    }
+
+
+    fun getToppoc(index: Int) {
+        setState {
+            copy(loading = true, refresh = true, toppics = null)
+        }
+
+        viewModelScope.launch {
+            val data = repository.getToppic(index)
+            setState {
+                copy(loading = false, refresh = false, toppics = data)
             }
         }
     }

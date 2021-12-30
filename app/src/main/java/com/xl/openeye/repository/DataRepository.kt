@@ -14,4 +14,9 @@ class DataRepository @Inject constructor(private val service: EyeApi) : BaseRepo
 
 
     suspend fun getFollow(num: String) = service.getFollow(start = num)
+
+    suspend fun getType() = service.getType()
+
+
+    suspend fun getToppic(index: Int) = service.getToppic(index.toString())
 }
