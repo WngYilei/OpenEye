@@ -1,53 +1,86 @@
 package com.xl.openeye.ui.discover.information
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.xl.openeye.R
+import com.xl.openeye.databinding.FragmentInfoMationBinding
+import com.xl.openeye.itemcell.NewsInfomationItem
+import com.xl.openeye.itemcell.NewsTextItem
+import com.xl.openeye.itemcell.SpecialItem
+import com.xl.openeye.ui.discover.DiscoverViewModel
 import com.xl.openeye.ui.discover.flow.FllowFragment
+import com.xl.xl_base.adapter.image.ImageLoader
+import com.xl.xl_base.adapter.item.ItemCell
+import com.xl.xl_base.adapter.recycler.StableAdapter
+import com.xl.xl_base.adapter.recycler.createStableAdapter
+import com.xl.xl_base.base.BaseFragment
+import com.xl.xl_base.tool.ktx.collectHandlerFlow
+import com.xl.xl_base.tool.ktx.onSmartRefreshCallback
 import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 @AndroidEntryPoint
-class InfoMationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_info_mation, container, false)
-    }
+class InfoMationFragment :
+    BaseFragment<FragmentInfoMationBinding>(FragmentInfoMationBinding::inflate) {
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment InfoMationFragment.
-         */
-
         @JvmStatic
         fun newInstance() =
             InfoMationFragment()
+    }
+
+    val viewModel: DiscoverViewModel by viewModels()
+
+
+    private lateinit var recyclerAdapter: StableAdapter
+    private var num: Int = 0
+
+    override fun onFragmentCreate(savedInstanceState: Bundle?) {
+
+        viewBinding.smartRefresh.onSmartRefreshCallback {
+            onRefresh {
+                num = 0
+                viewModel.getNewInfo(num)
+            }
+            onLoadMore {
+                num++
+                viewModel.getNewInfo(num)
+            }
+        }
+
+        viewBinding.smartRefresh.autoRefresh()
+
+        recyclerAdapter = createStableAdapter {
+            imageLoader = ImageLoader(this@InfoMationFragment)
+        }
+
+
+        viewBinding.recycle.apply {
+            adapter = recyclerAdapter
+            layoutManager =
+                LinearLayoutManager(context).apply { orientation = LinearLayoutManager.VERTICAL }
+        }
+
+        viewModel.state.collectHandlerFlow(this) { state ->
+            state.newsInfo?.let { it ->
+                viewBinding.smartRefresh.finishRefresh()
+                viewBinding.smartRefresh.finishLoadMore()
+
+                val items = mutableListOf<ItemCell>()
+                it.itemList.forEach {
+                    if (it.type == "textCard")
+                        items.add(NewsTextItem(it.data.text))
+                    else items.add(NewsInfomationItem(it))
+                }
+                items.size.let { it1 ->
+                    recyclerAdapter.submitList(it1, items, state.refresh)
+                }
+            }
+        }
     }
 }

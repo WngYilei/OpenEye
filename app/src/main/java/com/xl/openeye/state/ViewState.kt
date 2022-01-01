@@ -1,9 +1,6 @@
 package com.xl.openeye.state
 
-import com.xl.openeye.dataclass.CategoryInfoItem
-import com.xl.openeye.dataclass.FollowInfo
-import com.xl.openeye.dataclass.HomeInfo
-import com.xl.openeye.dataclass.Toppics
+import com.xl.openeye.dataclass.*
 
 data class ViewState(
     var isFirst: Boolean = false,
@@ -12,5 +9,6 @@ data class ViewState(
     var homeInfo: HomeInfo? = null,
     var followInfo: FollowInfo? = null,
     var categoryInfo: List<CategoryInfoItem>? = null,
-    var toppics: Toppics? = null
+    var toppics: Toppics? = null,
+    var newsInfo: NewsInfo? = null
 )

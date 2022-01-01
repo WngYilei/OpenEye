@@ -50,4 +50,17 @@ class DiscoverViewModel @Inject constructor(var repository: DataRepository) :
             }
         }
     }
+
+    fun getNewInfo(index: Int) {
+        setState {
+            copy(loading = true, refresh = true, newsInfo = null)
+        }
+
+        viewModelScope.launch {
+            val data = repository.getNewInfo(index)
+            setState {
+                copy(loading = false, refresh = false, newsInfo = data)
+            }
+        }
+    }
 }

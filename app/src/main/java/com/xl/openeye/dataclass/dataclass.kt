@@ -249,3 +249,173 @@ data class Label(
 
 
 
+
+data class NewsInfo(
+    val adExist: Boolean,
+    val count: Int,
+    val itemList: List<NewItem>,
+    val nextPageUrl: String,
+    val total: Int
+)
+
+data class NewItem(
+    val adIndex: Int,
+    val `data`: NewData,
+    val id: Int,
+    val tag: Any,
+    val trackingData: Any,
+    val type: String
+)
+
+data class NewData(
+    val actionUrl: Any,
+    val adTrack: Any,
+    val backgroundImage: String,
+    val bannerList: List<Banner>,
+    val dataType: String,
+    val follow: Any,
+    val headerType: String,
+    val id: Int,
+    val startTime: Long,
+    val subTitle: Any,
+    val text: String,
+    val titleList: List<String>,
+    val type: String
+)
+
+data class Banner(
+    val background_image: String,
+    val link: String,
+    val poster_image: String,
+    val tag_name: String,
+    val title: String
+)
+
+
+
+data class RecommendInfo(
+    val adExist: Boolean,
+    val count: Int,
+    val itemList: List<RecommendItem>,
+    val nextPageUrl: String,
+    val total: Int
+)
+
+data class RecommendItem(
+    val adIndex: Int,
+    val `data`: RecommendData,
+    val id: Int,
+    val tag: Any,
+    val trackingData: Any,
+    val type: String
+)
+
+data class RecommendData(
+    val adTrack: Any,
+    val content: Content,
+    val dataType: String,
+    val header: RecommendHeader
+)
+
+data class Content(
+    val adIndex: Int,
+    val `data`: RecommendDataX,
+    val id: Int,
+    val tag: Any,
+    val trackingData: Any,
+    val type: String
+)
+
+data class RecommendHeader(
+    val actionUrl: String,
+    val followType: String,
+    val icon: String,
+    val iconType: String,
+    val id: Int,
+    val issuerName: String,
+    val labelList: Any,
+    val showHateVideo: Boolean,
+    val tagId: Int,
+    val tagName: Any,
+    val time: Long,
+    val topShow: Boolean
+)
+
+data class RecommendDataX(
+    val addWatermark: Boolean,
+    val area: String,
+    val checkStatus: String,
+    val city: String,
+    val collected: Boolean,
+    val consumption: Consumption,
+    val cover: Cover,
+    val createTime: Long,
+    val dataType: String,
+    val description: String,
+    val duration: Int,
+    val height: Int,
+    val id: Int,
+    val ifMock: Boolean,
+    val latitude: Double,
+    val library: String,
+    val longitude: Double,
+    val owner: Owner,
+    val playUrl: String,
+    val playUrlWatermark: String,
+    val privateMessageActionUrl: Any,
+    val reallyCollected: Boolean,
+    val recentOnceReply: RecentOnceReply,
+    val releaseTime: Long,
+    val resourceType: String,
+    val selectedTime: Any,
+    val source: String,
+    val status: Any,
+    val tags: List<Tag>,
+    val title: String,
+    val transId: Any,
+    val type: String,
+    val uid: Int,
+    val updateTime: Long,
+    val url: String,
+    val urls: List<String>,
+    val urlsWithWatermark: List<String>,
+    val validateResult: String,
+    val validateStatus: String,
+    val validateTaskId: String,
+    val width: Int
+)
+
+
+
+data class Owner(
+    val actionUrl: String,
+    val area: Any,
+    val avatar: String,
+    val birthday: Long,
+    val city: String,
+    val country: String,
+    val cover: Any,
+    val description: String,
+    val expert: Boolean,
+    val followed: Boolean,
+    val gender: String,
+    val ifPgc: Boolean,
+    val job: String,
+    val library: String,
+    val limitVideoOpen: Boolean,
+    val nickname: String,
+    val registDate: Long,
+    val releaseDate: Long,
+    val uid: Int,
+    val university: String,
+    val userType: String
+)
+
+data class RecentOnceReply(
+    val actionUrl: String,
+    val contentType: Any,
+    val dataType: String,
+    val message: String,
+    val nickname: String
+)
+
