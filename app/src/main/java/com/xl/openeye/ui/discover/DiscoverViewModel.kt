@@ -63,4 +63,17 @@ class DiscoverViewModel @Inject constructor(var repository: DataRepository) :
             }
         }
     }
+
+    fun getRecommend(index: String) {
+        setState {
+            copy(loading = true, refresh = true, recommendInfo = null)
+        }
+
+        viewModelScope.launch {
+            val data = repository.getRecommend(index)
+            setState {
+                copy(loading = false, refresh = false, recommendInfo = data)
+            }
+        }
+    }
 }

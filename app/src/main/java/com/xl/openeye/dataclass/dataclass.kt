@@ -391,7 +391,7 @@ data class Owner(
     val actionUrl: String,
     val area: Any,
     val avatar: String,
-    val birthday: Long,
+    val birthday: Long?,
     val city: String,
     val country: String,
     val cover: Any,

@@ -36,4 +36,10 @@ interface EyeApi {
         @Query("num") num: String = "10",
         @Query("start") start: String
     ): NewsInfo
+
+    @GET("/api/v7/community/tab/rec")
+    suspend fun getRecommend(
+        @Query("startScore") startScore:String,
+        @Query("pageCount") pageCount: String = "1"
+    ): RecommendInfo
 }
