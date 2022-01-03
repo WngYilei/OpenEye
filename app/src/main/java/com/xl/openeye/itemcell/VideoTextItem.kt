@@ -3,10 +3,10 @@ package com.xl.openeye.itemcell
 import android.view.View
 import com.xl.openeye.R
 import com.xl.openeye.dataclass.Data
-import com.xl.openeye.utils.TimeFormatUtils
 import com.xl.xl_base.adapter.item.ItemCell
 import com.xl.xl_base.adapter.recycler.RecyclerSupport
 import com.xl.xl_base.adapter.recycler.RecyclerVH
+import com.xl.xl_base.tool.util.DateUtil
 import kotlinx.android.synthetic.main.item_video_text.view.*
 
 class VideoTextItem(val data: Data) : ItemCell {
@@ -24,7 +24,11 @@ class VideoTextItem(val data: Data) : ItemCell {
         override fun bind(itemCell: ItemCell, payloads: MutableList<Any>) {
             val cell = itemCell as VideoTextItem
             itemView.item_videdetail_title.text = cell.data.title
-            itemView.item_videodetail_type.text = "#" + cell.data.type + "/" + TimeFormatUtils.getYYMMDDHHmm(cell.data.author.latestReleaseTime.toInt())
+
+            itemView.item_videodetail_type.text = "#" + cell.data.type + "/" + DateUtil.format(
+                cell.data.author.latestReleaseTime,
+                "yyyy/mm/dd HH:mm"
+            )
             itemView.item_videdetail_description.text = cell.data.description
             itemView.item_video_text_like.text = cell.data.consumption.collectionCount.toString()
             itemView.item_video_text_share.text = cell.data.consumption.shareCount.toString()

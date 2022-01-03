@@ -3,10 +3,10 @@ package com.xl.openeye.itemcell
 import android.view.View
 import com.xl.openeye.R
 import com.xl.openeye.dataclass.RankingData
-import com.xl.openeye.utils.TimeFormatUtils
 import com.xl.xl_base.adapter.item.ItemCell
 import com.xl.xl_base.adapter.recycler.RecyclerSupport
 import com.xl.xl_base.adapter.recycler.RecyclerVH
+import com.xl.xl_base.tool.util.DateUtil
 import kotlinx.android.synthetic.main.item_ranking_video.view.*
 import kotlinx.android.synthetic.main.item_ranking_video.view.item_img_author
 import kotlinx.android.synthetic.main.item_ranking_video.view.item_tv_video_description
@@ -23,7 +23,8 @@ class RankingItem(var rankingData: RankingData) : ItemCell {
         override fun bind(itemCell: ItemCell, payloads: MutableList<Any>) {
             val cell = itemCell as RankingItem
             itemView.item_ranking_video_type.text = cell.rankingData.category
-            itemView.item_ranking_video_time.text = TimeFormatUtils.getHHmm(cell.rankingData.duration * 1000)
+
+            itemView.item_ranking_video_time.text =   DateUtil.format(cell.rankingData.duration * 1000.toLong(),"HH:mm")
             itemView.item_ranking_video_title.text = cell.rankingData.title
             itemView.item_tv_video_description.text = cell.rankingData.author.name
 
