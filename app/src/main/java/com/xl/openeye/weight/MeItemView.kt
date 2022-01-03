@@ -1,51 +1,45 @@
-package com.xl.openeye.weight;
+package com.xl.openeye.weight
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.content.Context
+import android.widget.RelativeLayout
+import android.view.LayoutInflater
+import android.util.AttributeSet
+import com.xl.openeye.R
+import com.xl.openeye.databinding.ViewMeItemBinding
 
-import com.bumptech.glide.Glide;
-import com.xl.openeye.R;
-import com.xl.openeye.databinding.ViewMeItemBinding;
+class MeItemView : RelativeLayout {
+    var viewMeItemBinding: ViewMeItemBinding? = null
 
-public class MeItemView extends RelativeLayout {
-    ViewMeItemBinding viewMeItemBinding;
-
-    public MeItemView(Context context) {
-        super(context);
+    constructor(context: Context?) : super(context) {}
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        initView(context, attrs)
     }
 
-    public MeItemView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        initView(context, attrs);
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
+        initView(context, attrs)
     }
 
-    public MeItemView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        initView(context, attrs);
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(
+        context,
+        attrs,
+        defStyleAttr,
+        defStyleRes
+    ) {
+        initView(context, attrs)
     }
 
-    public MeItemView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        initView(context, attrs);
+    private fun initView(context: Context, attrs: AttributeSet) {
+        viewMeItemBinding = ViewMeItemBinding.inflate(LayoutInflater.from(getContext()), this, false)
+        addView(viewMeItemBinding!!.root)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.meitem)
+        val icon = typedArray.getResourceId(R.styleable.meitem_icon, 0)
+        val text = typedArray.getString(R.styleable.meitem_text)
+        typedArray.recycle()
+        viewMeItemBinding!!.meIcon.setImageDrawable(resources.getDrawable(icon, null))
+        viewMeItemBinding!!.meText.text = text
     }
-
-    private void initView(Context context, AttributeSet attrs) {
-        viewMeItemBinding = ViewMeItemBinding.inflate(LayoutInflater.from(getContext()), this, false);
-        addView(viewMeItemBinding.getRoot());
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.meitem);
-        int icon = typedArray.getResourceId(R.styleable.meitem_icon, 0);
-        String text = typedArray.getString(R.styleable.meitem_text);
-        typedArray.recycle();
-        viewMeItemBinding.meIcon.setImageDrawable(getResources().getDrawable(icon, null));
-        viewMeItemBinding.meText.setText(text);
-    }
-
 }
