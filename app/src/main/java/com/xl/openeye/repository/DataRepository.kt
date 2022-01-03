@@ -18,7 +18,6 @@ class DataRepository @Inject constructor(private val service: EyeApi) : BaseRepo
 
     suspend fun getType() = service.getType()
 
-
     suspend fun getToppic(index: Int) = service.getToppic(index.toString())
 
     suspend fun getNewInfo(index: Int) = service.getNews(start = index.toString())
@@ -26,4 +25,7 @@ class DataRepository @Inject constructor(private val service: EyeApi) : BaseRepo
     suspend fun getRecommend(index: String) = service.getRecommend(startScore = index)
 
     suspend fun getRanking(@RankingType type: String) = service.getRanking(type)
+
+
+    suspend fun getVideoRecommend(id: String) = service.getVideoRecommend(id)
 }

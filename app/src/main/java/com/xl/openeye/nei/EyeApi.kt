@@ -44,4 +44,9 @@ interface EyeApi {
 
     @GET("/api/v4/rankList/videos")
     suspend fun getRanking(@Query("strategy") @RankingType strategy: String): RankingInfo
+
+    @GET("/api/v4/video/related")
+    suspend fun getVideoRecommend(@Query("id") id: String): VideoRecommendInfo
+
+
 }

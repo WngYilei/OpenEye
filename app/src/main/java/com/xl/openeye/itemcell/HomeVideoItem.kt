@@ -28,6 +28,9 @@ class HomeVideoItem(val data: Data) : ItemCell {
             itemView.item_tv_video_title.text = cell.data.title
             itemView.item_tv_video_description.text = cell.data.author.name
 
+            itemView.item_img_home_video.setOnClickListener {
+                support.detailClickCallback?.invoke(layoutPosition, 0, cell.data)
+            }
             support.imageLoader?.display(
                 itemView.item_img_home_video,
                 cell.data.cover.feed,

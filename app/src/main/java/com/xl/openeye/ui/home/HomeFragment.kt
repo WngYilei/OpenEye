@@ -1,5 +1,6 @@
 package com.xl.openeye.ui.home
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -8,11 +9,15 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hjq.bar.OnTitleBarListener
 import com.hjq.bar.TitleBar
+import com.xl.openeye.App
 import com.xl.openeye.databinding.HomeFragmentBinding
+import com.xl.openeye.dataclass.Data
 import com.xl.openeye.itemcell.BannerItem
 import com.xl.openeye.itemcell.HomeVideoItem
 import com.xl.openeye.itemcell.TextHeaderItem
+import com.xl.openeye.ui.video.VideoDetailActivity
 import com.xl.openeye.utils.StringUtils
+import com.xl.openeye.utils.goActivity
 import com.xl.xl_base.adapter.image.ImageLoader
 import com.xl.xl_base.adapter.item.ItemCell
 import com.xl.xl_base.adapter.recycler.*
@@ -52,13 +57,20 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
 
         recyclerAdapter = createStableAdapter {
             imageLoader = ImageLoader(this@HomeFragment)
+            onDetailClickCallback { position, type, value ->
+                val data = value as Data
+                App.data = data
+                goActivity(VideoDetailActivity::class.java)
+            }
         }
 
 
         viewBinding.recycle.apply {
             adapter = AdapterConfig.createNo(recyclerAdapter)
             layoutManager =
-                LinearLayoutManager(context).apply { orientation = LinearLayoutManager.VERTICAL }
+                LinearLayoutManager(context).apply {
+                    orientation = LinearLayoutManager.VERTICAL
+                }
             addItemDecoration(
                 GridDividerItemDecoration(
                     0,

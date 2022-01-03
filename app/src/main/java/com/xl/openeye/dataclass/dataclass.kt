@@ -514,5 +514,12 @@ data class RankingConsumption(
     val shareCount: Int
 )
 
+data class VideoRecommendInfo(
+    val adExist: Boolean,
+    val count: Int,
+    val itemList: List<Item>,
+    val nextPageUrl: Any,
+    val total: Int
+)
 
 

@@ -33,7 +33,7 @@ android {
             applicationVariants.all {
                 outputs.all {
                     if (this is ApkVariantOutputImpl) {
-                        this.outputFileName = "Gradle_${defaultConfig.versionName}_debug.apk"
+                        this.outputFileName = "OpenEye_${defaultConfig.versionName}_debug.apk"
                     }
                 }
             }
@@ -47,7 +47,7 @@ android {
             applicationVariants.all {
                 this.outputs.all {
                     if (this is ApkVariantOutputImpl) {
-                        this.outputFileName = "Gradle_${defaultConfig.versionName}_release.apk"
+                        this.outputFileName = "OpenEye_${defaultConfig.versionName}_release.apk"
                     }
                 }
             }
