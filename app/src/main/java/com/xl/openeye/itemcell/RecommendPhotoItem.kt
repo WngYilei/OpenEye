@@ -35,7 +35,7 @@ class RecommendPhotoItem(val recommendItem: RecommendItem) : ItemCell {
             Glide.with(itemView).load(cell.recommendItem.data.content.data.cover.feed).override(
                 cell.recommendItem.data.content.data.width,
                 cell.recommendItem.data.content.data.height
-            ).centerInside().into(itemView.item_recommend_photo)
+            ).into(itemView.item_recommend_photo)
 
 
             support.imageLoader?.displayAvatar(

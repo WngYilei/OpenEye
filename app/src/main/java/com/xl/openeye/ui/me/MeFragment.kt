@@ -1,14 +1,14 @@
 package com.xl.openeye.ui.me
 
-import androidx.lifecycle.ViewModelProvider
+import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.request.RequestOptions
 import com.xl.openeye.R
 import com.xl.openeye.databinding.MeFragmentBinding
+import com.xl.openeye.utils.StatusBarUtils
 import com.xl.xl_base.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +24,16 @@ class MeFragment : BaseFragment<MeFragmentBinding>(MeFragmentBinding::inflate) {
 
     override fun onFragmentCreate(savedInstanceState: Bundle?) {
 
+        Glide.with(this).load(R.mipmap.logo).apply(RequestOptions.bitmapTransform(CircleCrop()))
+            .into(viewBinding.imgMeHeard)
     }
 
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        StatusBarUtils.setStatusBarColor(
+            activity as Activity,
+            if (hidden) R.color.white else R.color.me_title
+        )
+    }
 }

@@ -11,5 +11,6 @@ data class ViewState(
     var categoryInfo: List<CategoryInfoItem>? = null,
     var toppics: Toppics? = null,
     var newsInfo: NewsInfo? = null,
-    var recommendInfo: RecommendInfo? = null
+    var recommendInfo: RecommendInfo? = null,
+    var rankingInfo: RankingInfo? = null
 )

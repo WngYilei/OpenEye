@@ -1,10 +1,9 @@
 package com.xl.openeye.nei
 
 
+import com.xl.openeye.annotation.RankingType
 import com.xl.openeye.dataclass.*
-import com.xl.xl_base.api.Response
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface EyeApi {
@@ -39,7 +38,10 @@ interface EyeApi {
 
     @GET("/api/v7/community/tab/rec")
     suspend fun getRecommend(
-        @Query("startScore") startScore:String,
+        @Query("startScore") startScore: String,
         @Query("pageCount") pageCount: String = "1"
     ): RecommendInfo
+
+    @GET("/api/v4/rankList/videos")
+    suspend fun getRanking(@Query("strategy") @RankingType strategy: String): RankingInfo
 }

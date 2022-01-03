@@ -1,6 +1,7 @@
 package com.xl.openeye.repository
 
 import android.util.Log
+import com.xl.openeye.annotation.RankingType
 import com.xl.openeye.dataclass.HomeInfo
 import com.xl.openeye.nei.EyeApi
 import com.xl.xl_base.api.Response
@@ -23,4 +24,6 @@ class DataRepository @Inject constructor(private val service: EyeApi) : BaseRepo
     suspend fun getNewInfo(index: Int) = service.getNews(start = index.toString())
 
     suspend fun getRecommend(index: String) = service.getRecommend(startScore = index)
+
+    suspend fun getRanking(@RankingType type: String) = service.getRanking(type)
 }
