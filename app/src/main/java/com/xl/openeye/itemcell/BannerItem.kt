@@ -32,7 +32,6 @@ class BannerItem(val activity: AppCompatActivity, val itemList: List<Item>) : It
         override fun bind(itemCell: ItemCell, payloads: MutableList<Any>) {
             val cell = itemCell as BannerItem
 
-
             itemView.banner.addBannerLifecycleObserver(cell.activity)
                 .setAdapter(object : BannerImageAdapter<Item>(cell.itemList) {
                     override fun onBindView(
@@ -46,6 +45,9 @@ class BannerItem(val activity: AppCompatActivity, val itemList: List<Item>) : It
                             .into(holder.imageView)
                     }
                 }).indicator = CircleIndicator(cell.activity)
+            itemView.banner.setOnBannerListener { any, position ->
+                support.detailClickCallback?.invoke(position, 0, cell.itemList[position].data)
+            }
         }
     }
 

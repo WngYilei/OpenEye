@@ -1,4 +1,5 @@
 package com.xl.openeye.itemcell
+
 import android.view.View
 import com.xl.openeye.R
 import com.xl.openeye.dataclass.ToppocItem
@@ -20,7 +21,7 @@ class SpecialItem(var toppocItem: ToppocItem) : ItemCell {
         override fun bind(itemCell: ItemCell, payloads: MutableList<Any>) {
             val cell = itemCell as SpecialItem
             itemView.item_special_img.setOnClickListener {
-                support.simpleCallback?.invoke(layoutPosition)
+                support.detailClickCallback?.invoke(layoutPosition, 0, cell.toppocItem.data)
             }
             support.imageLoader?.display(
                 itemView.item_special_img,

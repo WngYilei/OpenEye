@@ -29,6 +29,9 @@ class FollowItem(var data: Item) : ItemCell {
 
         val recyclerAdapter = createAdapter {
             imageLoader = ImageLoader(itemView.context)
+            onDetailClickCallback { position, type, value ->
+                support.detailClickCallback?.invoke(position, type, value)
+            }
         }
 
         init {

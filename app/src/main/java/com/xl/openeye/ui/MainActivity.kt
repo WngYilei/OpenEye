@@ -2,10 +2,7 @@ package com.xl.openeye.ui
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
 import android.view.Window
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.xl.openeye.R
 import com.xl.openeye.databinding.ActivityMainBinding
 import com.xl.openeye.ui.discover.DiscoverFragment

@@ -1,6 +1,5 @@
 package com.xl.openeye.ui.home
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -17,13 +16,13 @@ import com.xl.openeye.itemcell.HomeVideoItem
 import com.xl.openeye.itemcell.TextHeaderItem
 import com.xl.openeye.ui.video.VideoDetailActivity
 import com.xl.openeye.utils.StringUtils
-import com.xl.openeye.utils.goActivity
 import com.xl.xl_base.adapter.image.ImageLoader
 import com.xl.xl_base.adapter.item.ItemCell
 import com.xl.xl_base.adapter.recycler.*
 import com.xl.xl_base.base.BaseFragment
 import com.xl.xl_base.tool.ktx.collectHandlerFlow
 import com.xl.xl_base.tool.ktx.dp
+import com.xl.xl_base.tool.ktx.goActivity
 import com.xl.xl_base.tool.ktx.onSmartRefreshCallback
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -57,7 +56,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
 
         recyclerAdapter = createStableAdapter {
             imageLoader = ImageLoader(this@HomeFragment)
-            onDetailClickCallback { position, type, value ->
+            onDetailClickCallback { _, _, value ->
                 val data = value as Data
                 App.data = data
                 goActivity(VideoDetailActivity::class.java)

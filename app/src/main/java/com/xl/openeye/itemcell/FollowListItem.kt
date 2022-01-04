@@ -23,11 +23,20 @@ class FollowListItem(var item: Item) : ItemCell {
         override fun bind(itemCell: ItemCell, payloads: MutableList<Any>) {
             val cell = itemCell as FollowListItem
 
-            itemView.item_follow_list_time.text = DateUtil.format(cell.item.data.duration*1000.toLong(),"HH:mm")
+            itemView.item_follow_list_time.text =
+                DateUtil.format(cell.item.data.duration * 1000.toLong(), "HH:mm")
             itemView.item_follow_list_name.text = cell.item.data.title
             itemView.item_follow_list_type.text = cell.item.data.category
 
-            support.imageLoader?.display(itemView.item_follow_list_img,cell.item.data.cover.feed, centerCrop = true, radius = 8.toPx())
+            support.imageLoader?.display(
+                itemView.item_follow_list_img,
+                cell.item.data.cover.feed,
+                centerCrop = true,
+                radius = 8.toPx()
+            )
+            itemView.item_follow_list_img.setOnClickListener {
+                support.detailClickCallback?.invoke(layoutPosition, 0, cell.item)
+            }
         }
     }
 }

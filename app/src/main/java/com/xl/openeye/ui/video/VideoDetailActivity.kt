@@ -19,7 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import cn.jzvd.Jzvd
 import com.bumptech.glide.Glide
 import com.xl.openeye.dataclass.Data
-import com.xl.openeye.utils.goActivity
+import com.xl.openeye.itemcell.VideoTextHeaderItem
+import com.xl.xl_base.tool.ktx.goActivity
 
 
 @AndroidEntryPoint
@@ -59,7 +60,7 @@ class VideoDetailActivity :
             state.videoRecommendInfo?.let { it ->
                 it.itemList.forEach {
                     if (it.type == "textCard") {
-                        items.add(TextHeaderItem(it.data.text))
+                        items.add(VideoTextHeaderItem(it.data.text))
                     } else {
                         items.add(VideoRecommendItem(it.data))
                     }

@@ -20,8 +20,7 @@ object AndroidClient {
 
 object BuildPlugins {
     const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.2"
-    const val kotlinGradlePlugin =
-        "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.standardLibrary}"
+    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Kotlin.standardLibrary}"
     const val hiltPlugin = "com.google.dagger:hilt-android-gradle-plugin:2.28-alpha"
 
     const val androidApplication = "com.android.application"
@@ -61,8 +60,7 @@ object Libraries {
     }
 
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Kotlin.standardLibrary}"
-    const val kotlinCoroutines =
-        "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Kotlin.coroutines}"
+    const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Kotlin.coroutines}"
     const val kotlinCoroutinesAndroid =
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Kotlin.coroutines}"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
@@ -94,11 +92,5 @@ object Libraries {
     const val hiltandroid = "com.google.dagger:hilt-android:2.36"
     const val daggercompiler = "com.google.dagger:hilt-android-compiler:2.36"
     const val hiltcompiler = "androidx.hilt:hilt-compiler:1.0.0"
-    const val base = "com.xl:base:1.1.1"
+    const val base = "com.xl:base:1.1.2"
 }
-
-
-object Modle {
-    const val ChechShake = ":CheckShake"
-}
-

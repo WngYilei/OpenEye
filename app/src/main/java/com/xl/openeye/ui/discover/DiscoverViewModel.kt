@@ -19,7 +19,7 @@ class DiscoverViewModel @Inject constructor(var repository: DataRepository) :
         viewModelScope.launch {
             val data = repository.getFollow(num)
             setState {
-                copy(loading = true, refresh = true, followInfo = data, homeInfo = null)
+                copy(loading = false, refresh = false, followInfo = data, homeInfo = null)
             }
         }
     }
