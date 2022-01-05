@@ -40,8 +40,7 @@ class FllowFragment : BaseFragment<FragmentFllowBinding>(FragmentFllowBinding::i
 
     companion object {
         @JvmStatic
-        fun newInstance() =
-            FllowFragment()
+        fun newInstance() = FllowFragment()
     }
 
     val viewModel: DiscoverViewModel by viewModels()
@@ -76,19 +75,11 @@ class FllowFragment : BaseFragment<FragmentFllowBinding>(FragmentFllowBinding::i
 
 
         viewBinding.recycle.apply {
-            adapter = AdapterConfig.createNo(recyclerAdapter)
-            layoutManager =
-                LinearLayoutManager(context).apply { orientation = LinearLayoutManager.VERTICAL }
-            addItemDecoration(
-                GridDividerItemDecoration(
-                    0,
-                    0.5.dp, Color.parseColor("#EEEEEE")
-                )
-            )
+            adapter = recyclerAdapter
+            layoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.VERTICAL }
         }
 
         viewModel.state.collectHandlerFlow(this) { state ->
-
             state.followInfo?.let { it ->
                 viewBinding.smartRefresh.finishRefresh()
                 viewBinding.smartRefresh.finishLoadMore()

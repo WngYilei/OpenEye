@@ -31,6 +31,9 @@
         android:theme="@style/Theme.OpenEye"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.discover.special.SpecialDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.video.VideoDetailActivity"
             android:exported="true" />
         <activity

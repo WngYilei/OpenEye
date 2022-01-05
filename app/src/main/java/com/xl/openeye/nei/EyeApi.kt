@@ -4,6 +4,7 @@ package com.xl.openeye.nei
 import com.xl.openeye.annotation.RankingType
 import com.xl.openeye.dataclass.*
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface EyeApi {
@@ -48,5 +49,8 @@ interface EyeApi {
     @GET("/api/v4/video/related")
     suspend fun getVideoRecommend(@Query("id") id: String): VideoRecommendInfo
 
+
+    @GET("/api/v3/lightTopics/internal/{id}")
+    suspend fun getSpecialDetail(@Path("id") id: String): SpecialDetailInfo
 
 }

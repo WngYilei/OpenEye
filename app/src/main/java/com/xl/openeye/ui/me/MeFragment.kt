@@ -8,9 +8,8 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
 import com.xl.openeye.R
 import com.xl.openeye.databinding.MeFragmentBinding
-import com.xl.openeye.utils.StatusBarUtils
-
 import com.xl.xl_base.base.BaseFragment
+import com.xl.xl_base.tool.util.StatusBarUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

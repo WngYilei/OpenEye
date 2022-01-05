@@ -1,6 +1,5 @@
 package com.xl.openeye.itemcell
 
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -54,9 +53,7 @@ class FollowItem(var data: Item) : ItemCell {
             list.forEach {
                 items.add(FollowListItem(it))
             }
-            list.size?.let {
-                recyclerAdapter.submitList(it, items)
-            }
+            recyclerAdapter.submitList(list.size, items)
         }
     }
 }

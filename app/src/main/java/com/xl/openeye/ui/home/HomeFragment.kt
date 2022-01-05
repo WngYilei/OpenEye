@@ -15,7 +15,6 @@ import com.xl.openeye.itemcell.BannerItem
 import com.xl.openeye.itemcell.HomeVideoItem
 import com.xl.openeye.itemcell.TextHeaderItem
 import com.xl.openeye.ui.video.VideoDetailActivity
-import com.xl.openeye.utils.StringUtils
 import com.xl.xl_base.adapter.image.ImageLoader
 import com.xl.xl_base.adapter.item.ItemCell
 import com.xl.xl_base.adapter.recycler.*
@@ -24,6 +23,7 @@ import com.xl.xl_base.tool.ktx.collectHandlerFlow
 import com.xl.xl_base.tool.ktx.dp
 import com.xl.xl_base.tool.ktx.goActivity
 import com.xl.xl_base.tool.ktx.onSmartRefreshCallback
+import com.xl.xl_base.tool.util.StringUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

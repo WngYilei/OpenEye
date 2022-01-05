@@ -100,6 +100,7 @@ data class Header(
     val iconType: String,
     val id: Int,
     val ifPgc: Boolean,
+    val time: Int,
     val ifShowNotificationIcon: Boolean,
     val subTitle: Any,
     val title: String,
@@ -516,4 +517,109 @@ data class VideoRecommendInfo(
     val total: Int
 )
 
+
+
+
+data class SpecialDetailInfo(
+    val adTrack: Any,
+    val brief: String,
+    val count: Int,
+    val headerImage: String,
+    val id: Int,
+    val itemList: List<SpecialDetailItem>,
+    val shareLink: String,
+    val text: String
+)
+
+data class SpecialDetailItem(
+    val adIndex: Int,
+    val `data`: SpecialDetailData,
+    val id: Int,
+    val tag: Any,
+    val trackingData: Any,
+    val type: String
+)
+
+data class SpecialDetailData(
+    val adTrack: List<Any>,
+    val content: SpecialDetailContent,
+    val dataType: String,
+    val header: SpecialDetailHeader
+)
+
+data class SpecialDetailContent(
+    val adIndex: Int,
+    val `data`: SpecialDetailDataX,
+    val id: Int,
+    val tag: Any,
+    val trackingData: Any,
+    val type: String
+)
+
+data class SpecialDetailHeader(
+    val actionUrl: String,
+    val followType: String,
+    val icon: String,
+    val iconType: String,
+    val id: Int,
+    val issuerName: String,
+    val labelList: Any,
+    val showHateVideo: Boolean,
+    val tagId: Int,
+    val tagName: Any,
+    val time: Long,
+    val topShow: Boolean
+)
+
+data class SpecialDetailDataX(
+    val ad: Boolean,
+    val adTrack: List<Any>,
+    val author: Author,
+    val brandWebsiteInfo: Any,
+    val campaign: Any,
+    val category: String,
+    val collected: Boolean,
+    val consumption: Consumption,
+    val cover: Cover,
+    val dataType: String,
+    val date: Long,
+    val description: String,
+    val descriptionEditor: String,
+    val descriptionPgc: Any,
+    val duration: Int,
+    val favoriteAdTrack: Any,
+    val id: Int,
+    val idx: Int,
+    val ifLimitVideo: Boolean,
+    val label: Any,
+    val labelList: List<Any>,
+    val lastViewTime: Any,
+    val library: String,
+    val playInfo: List<PlayInfo>,
+    val playUrl: String,
+    val played: Boolean,
+    val playlists: Any,
+    val promotion: Any,
+    val provider: Provider,
+    val reallyCollected: Boolean,
+    val recallSource: Any,
+    val recall_source: Any,
+    val releaseTime: Long,
+    val remark: String,
+    val resourceType: String,
+    val searchWeight: Int,
+    val shareAdTrack: Any,
+    val slogan: String,
+    val src: Any,
+    val subtitles: List<Any>,
+    val tags: List<Tag>,
+    val thumbPlayUrl: Any,
+    val title: String,
+    val titlePgc: Any,
+    val type: String,
+    val videoPosterBean: Any,
+    val waterMarks: Any,
+    val webAdTrack: Any,
+    val webUrl: WebUrl
+)
 

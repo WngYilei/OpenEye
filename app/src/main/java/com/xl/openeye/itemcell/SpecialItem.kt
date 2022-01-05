@@ -29,6 +29,9 @@ class SpecialItem(var toppocItem: ToppocItem) : ItemCell {
                 centerCrop = true,
                 radius = 10.toPx()
             )
+            itemView.item_special_img.setOnClickListener {
+                support.detailClickCallback?.invoke(layoutPosition, 0, cell.toppocItem.data)
+            }
         }
     }
 }

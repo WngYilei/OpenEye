@@ -53,6 +53,10 @@ class SpecialFragment : BaseFragment<FragmentSpecialBinding>(FragmentSpecialBind
 
         recyclerAdapter = createStableAdapter {
             imageLoader = ImageLoader(this@SpecialFragment)
+            onDetailClickCallback { position, type, value ->
+                val data = value as Data
+                goActivity(SpecialDetailActivity::class.java, ("id" to data.id.toString()))
+            }
         }
 
 
