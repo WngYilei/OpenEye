@@ -61,16 +61,13 @@ object Libraries {
 
     const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Kotlin.standardLibrary}"
     const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Kotlin.coroutines}"
-    const val kotlinCoroutinesAndroid =
-        "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Kotlin.coroutines}"
+    const val kotlinCoroutinesAndroid ="org.jetbrains.kotlinx:kotlinx-coroutines-android:${Kotlin.coroutines}"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
-    const val constraintLayout =
-        "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val ktxCore = "androidx.core:core-ktx:${Versions.ktx}"
     const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-    const val lifecycleExtensions =
-        "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycleExtensions}"
+    const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycleExtensions}"
     const val cardView = "androidx.cardview:cardview:${Versions.cardView}"
     const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
     const val material = "com.google.android.material:material:${Versions.material}"
@@ -78,14 +75,11 @@ object Libraries {
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     const val retrofit = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
-    const val okHttpLoggingInterceptor =
-        "com.squareup.okhttp3:logging-interceptor:${Versions.okHttpLoggingInterceptor}"
+    const val okHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttpLoggingInterceptor}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
-    const val navigationFragment =
-        "androidx.navigation:navigation-fragment-ktx:${Versions.fragmentKtx}"
+    const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.fragmentKtx}"
     const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.fragmentKtx}"
-    const val swipeRefreshLayout =
-        "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefreshLayout}"
+    const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefreshLayout}"
     const val fragment = "androidx.fragment:fragment-ktx:${Versions.fragment}"
 
     const val hiltlifecycleviewmodel = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"

@@ -14,6 +14,7 @@ import com.xl.openeye.dataclass.Data
 import com.xl.openeye.itemcell.BannerItem
 import com.xl.openeye.itemcell.HomeVideoItem
 import com.xl.openeye.itemcell.TextHeaderItem
+import com.xl.openeye.state.ViewEvent
 import com.xl.openeye.ui.video.VideoDetailActivity
 import com.xl.xl_base.adapter.image.ImageLoader
 import com.xl.xl_base.adapter.item.ItemCell
@@ -47,7 +48,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
         viewBinding.smartRefresh.onSmartRefreshCallback {
             onRefresh {
                 num = "0"
-                viewModel.getHome(1)
+                viewModel.submitAction(ViewEvent.Refresh)
             }
             onLoadMore {
                 viewModel.getNextHome(date, num)
