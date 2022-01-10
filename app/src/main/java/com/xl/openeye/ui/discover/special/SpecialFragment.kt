@@ -3,6 +3,7 @@ package com.xl.openeye.ui.discover.special
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xl.openeye.App
@@ -11,13 +12,13 @@ import com.xl.openeye.dataclass.Data
 import com.xl.openeye.itemcell.SpecialItem
 import com.xl.openeye.ui.discover.DiscoverViewModel
 import com.xl.openeye.ui.video.VideoDetailActivity
+import com.xl.openeye.utils.goActivity
 import com.xl.xl_base.adapter.image.ImageLoader
 import com.xl.xl_base.adapter.item.ItemCell
 import com.xl.xl_base.adapter.recycler.*
 import com.xl.xl_base.base.BaseFragment
 import com.xl.xl_base.tool.ktx.collectHandlerFlow
 import com.xl.xl_base.tool.ktx.dp
-import com.xl.xl_base.tool.ktx.goActivity
 import com.xl.xl_base.tool.ktx.onSmartRefreshCallback
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -53,9 +54,14 @@ class SpecialFragment : BaseFragment<FragmentSpecialBinding>(FragmentSpecialBind
 
         recyclerAdapter = createStableAdapter {
             imageLoader = ImageLoader(this@SpecialFragment)
-            onDetailClickCallback { position, type, value ->
+            onDetailViewDataClickCallback { position, type, view, value ->
                 val data = value as Data
-                goActivity(SpecialDetailActivity::class.java, ("id" to data.id.toString()))
+                goActivity(
+                    SpecialDetailActivity::class.java,
+                    view as ImageView,
+                    "special",
+                    ("id" to data.id.toString()),
+                )
             }
         }
 

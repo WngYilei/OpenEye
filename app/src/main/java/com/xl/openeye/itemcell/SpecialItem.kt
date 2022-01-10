@@ -20,9 +20,6 @@ class SpecialItem(var toppocItem: ToppocItem) : ItemCell {
         RecyclerVH(itemView, support) {
         override fun bind(itemCell: ItemCell, payloads: MutableList<Any>) {
             val cell = itemCell as SpecialItem
-            itemView.item_special_img.setOnClickListener {
-                support.detailClickCallback?.invoke(layoutPosition, 0, cell.toppocItem.data)
-            }
             support.imageLoader?.display(
                 itemView.item_special_img,
                 cell.toppocItem.data.image,
@@ -30,7 +27,12 @@ class SpecialItem(var toppocItem: ToppocItem) : ItemCell {
                 radius = 10.toPx()
             )
             itemView.item_special_img.setOnClickListener {
-                support.detailClickCallback?.invoke(layoutPosition, 0, cell.toppocItem.data)
+                support.detailViewDataClickCallback?.invoke(
+                    layoutPosition,
+                    0,
+                    itemView.item_special_img,
+                    cell.toppocItem.data
+                )
             }
         }
     }

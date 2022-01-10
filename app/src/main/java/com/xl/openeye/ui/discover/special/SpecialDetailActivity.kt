@@ -2,20 +2,22 @@ package com.xl.openeye.ui.discover.special
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hjq.bar.OnTitleBarListener
 import com.hjq.bar.TitleBar
-
+import com.xl.openeye.App
 import com.xl.openeye.databinding.ActivitySpecialDetailBinding
-import com.xl.openeye.itemcell.FollowItem
+import com.xl.openeye.dataclass.Data
+import com.xl.openeye.itemcell.SpecialDetailHeardItem
 import com.xl.openeye.itemcell.SpecialDetailItem
+import com.xl.openeye.ui.video.VideoDetailActivity
 import com.xl.xl_base.adapter.image.ImageLoader
 import com.xl.xl_base.adapter.item.ItemCell
 import com.xl.xl_base.adapter.recycler.RecyclerAdapter
-import com.xl.xl_base.adapter.recycler.StableAdapter
 import com.xl.xl_base.adapter.recycler.createAdapter
 import com.xl.xl_base.base.BaseActivity
 import com.xl.xl_base.tool.ktx.collectHandlerFlow
+import com.xl.xl_base.tool.ktx.goActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,6 +35,17 @@ class SpecialDetailActivity :
         }
         recyclerAdapter = createAdapter {
             imageLoader = ImageLoader(this@SpecialDetailActivity)
+            onDetailClickCallback { position, type, value ->
+                val data = value as Data
+                App.data = data
+                goActivity(VideoDetailActivity::class.java)
+            }
+        }
+
+        viewBinding.recycle.apply {
+            adapter = recyclerAdapter
+            layoutManager =
+                LinearLayoutManager(context).apply { orientation = LinearLayoutManager.VERTICAL }
         }
 
 
@@ -41,21 +54,17 @@ class SpecialDetailActivity :
                 finish()
             }
         })
-        viewModel.state.collectHandlerFlow(this) { state ->
 
+
+        viewModel.state.collectHandlerFlow(this) { state ->
             state.specialDetailInfo?.let {
                 viewBinding.titlebar.title = it.brief
-                viewBinding.tvSpecialDetailBrief.text = it.text
-                viewBinding.tvSpecialDetailText.text = it.brief
-                Glide.with(this).load(it.headerImage).centerInside().into(viewBinding.imgSpecialDetail)
-
                 val items = mutableListOf<ItemCell>()
+                items.add(SpecialDetailHeardItem(it))
                 it.itemList.forEach {
                     items.add(SpecialDetailItem(it.data))
                 }
-                items.size.let { it1 ->
-                    recyclerAdapter.submitList(it1, items)
-                }
+                recyclerAdapter.submitList(it.itemList.size, items)
             }
         }
 

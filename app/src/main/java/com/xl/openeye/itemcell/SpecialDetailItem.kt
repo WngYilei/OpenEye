@@ -2,14 +2,12 @@ package com.xl.openeye.itemcell
 
 import android.view.View
 import com.xl.openeye.R
-import com.xl.openeye.dataclass.Data
 import com.xl.openeye.dataclass.SpecialDetailData
 import com.xl.xl_base.adapter.item.ItemCell
 import com.xl.xl_base.adapter.recycler.RecyclerSupport
 import com.xl.xl_base.adapter.recycler.RecyclerVH
-
+import com.xl.xl_base.tool.ktx.toPx
 import com.xl.xl_base.tool.util.DateUtil
-
 import kotlinx.android.synthetic.main.item_special_detail.view.*
 
 
@@ -30,11 +28,20 @@ class SpecialDetailItem(var data: SpecialDetailData) : ItemCell {
                 itemView.img_special_detail_item_heard,
                 cell.data.header.icon,
             )
-            itemView.tv_special_detail_item_name.text = cell.data.header.issuerName
-            itemView.tv_special_detail_item_time.text = cell.data.header.time.toString() + "发布"
-            itemView.tv_special_detail_item_title.text = cell.data.content.data.title
+            support.imageLoader?.display(
+                itemView.item_img_ranking_video,
+                cell.data.content.data.cover.feed,
+                radius = 5f.toPx()
+            )
 
-            itemView.tv_special_detail_item_time.text =
+            itemView.item_img_ranking_video.setOnClickListener {
+                support.detailClickCallback?.invoke(layoutPosition, 0, cell.data.content.data)
+            }
+
+            itemView.tv_special_detail_item_name.text = cell.data.header.issuerName
+            itemView.tv_special_detail_item_time.text = cell.data.header.time.toString() + "发布："
+            itemView.tv_special_detail_item_title.text = cell.data.content.data.title
+            itemView.item_ranking_video_time.text =
                 DateUtil.format(cell.data.content.data.duration * 1000.toLong(), "HH:mm")
         }
     }

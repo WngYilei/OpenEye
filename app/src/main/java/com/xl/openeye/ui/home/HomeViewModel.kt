@@ -1,7 +1,5 @@
 package com.xl.openeye.ui.home
 
-
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.xl.openeye.repository.DataRepository
 import com.xl.openeye.state.ViewEvent
@@ -56,8 +54,6 @@ class HomeViewModel @Inject constructor(private val repository: DataRepository) 
     }
 
     fun getNextHome(date: String, num: String) {
-        Log.e("TAG", "date: $date")
-        Log.e("TAG", "num: $num")
         setState {
             copy(loading = true, homeInfo = null)
         }
