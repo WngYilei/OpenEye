@@ -5,10 +5,10 @@ import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.xl.openeye.App
-import com.xl.openeye.annotation.RankingType
 import com.xl.openeye.databinding.FragmentMonthRankingBinding
 import com.xl.openeye.dataclass.Data
 import com.xl.openeye.itemcell.RankingItem
+import com.xl.openeye.state.ViewEvent
 import com.xl.openeye.ui.video.VideoDetailActivity
 import com.xl.xl_base.adapter.image.ImageLoader
 import com.xl.xl_base.adapter.item.ItemCell
@@ -42,7 +42,7 @@ class MonthRankingFragment : BaseFragment<FragmentMonthRankingBinding>(FragmentM
                 goActivity(VideoDetailActivity::class.java)
             }
         }
-        viewModel.getRanking(RankingType.MONTH)
+        viewModel.submitAction(ViewEvent.RefreshMonthRanking)
         viewBinding.recycle.apply {
             adapter = AdapterConfig.createNo(recyclerAdapter)
             layoutManager = LinearLayoutManager(requireContext())

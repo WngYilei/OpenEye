@@ -2,17 +2,11 @@ package com.xl.openeye.ui.discover.type
 
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.xl.openeye.R
 import com.xl.openeye.databinding.FragmentTypeBinding
 import com.xl.openeye.itemcell.CategoryItem
-import com.xl.openeye.itemcell.FollowItem
+import com.xl.openeye.state.ViewEvent
 import com.xl.openeye.ui.discover.DiscoverViewModel
 import com.xl.xl_base.adapter.image.ImageLoader
 import com.xl.xl_base.adapter.item.ItemCell
@@ -39,7 +33,7 @@ class TypeFragment : BaseFragment<FragmentTypeBinding>(FragmentTypeBinding::infl
         recyclerAdapter = createAdapter {
             imageLoader = ImageLoader(this@TypeFragment)
         }
-        viewModel.getType()
+        viewModel.submitAction(ViewEvent.RefreshType)
         viewBinding.recycle.apply {
             adapter = AdapterConfig.createNo(recyclerAdapter)
             layoutManager = GridLayoutManager(context, 2)

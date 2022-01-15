@@ -13,6 +13,7 @@ import com.xl.openeye.databinding.FragmentInfoMationBinding
 import com.xl.openeye.itemcell.NewsInfomationItem
 import com.xl.openeye.itemcell.NewsTextItem
 import com.xl.openeye.itemcell.SpecialItem
+import com.xl.openeye.state.ViewEvent
 import com.xl.openeye.ui.discover.DiscoverViewModel
 import com.xl.openeye.ui.discover.flow.FllowFragment
 import com.xl.xl_base.adapter.image.ImageLoader
@@ -45,7 +46,7 @@ class InfoMationFragment :
         viewBinding.smartRefresh.onSmartRefreshCallback {
             onRefresh {
                 num = 0
-                viewModel.getNewInfo(num)
+                viewModel.submitAction(ViewEvent.RefreshNewInfo)
             }
             onLoadMore {
                 num++

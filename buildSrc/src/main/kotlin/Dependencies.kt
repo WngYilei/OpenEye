@@ -86,5 +86,5 @@ object Libraries {
     const val hiltandroid = "com.google.dagger:hilt-android:2.36"
     const val daggercompiler = "com.google.dagger:hilt-android-compiler:2.36"
     const val hiltcompiler = "androidx.hilt:hilt-compiler:1.0.0"
-    const val base = "com.xl:base:1.1.5"
+    const val base = "com.xl:base:1.1.6"
 }

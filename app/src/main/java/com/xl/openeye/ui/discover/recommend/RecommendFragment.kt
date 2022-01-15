@@ -27,6 +27,7 @@ import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import android.R.attr.divider
+import com.xl.openeye.state.ViewEvent
 
 
 @AndroidEntryPoint
@@ -51,8 +52,7 @@ class RecommendFragment :
 
         viewBinding.smartRefresh.onSmartRefreshCallback {
             onRefresh {
-
-                viewModel.getRecommend("1640770607000")
+                viewModel.submitAction(ViewEvent.RefreshRecommend)
             }
             onLoadMore {
                 viewModel.getRecommend(startScore)

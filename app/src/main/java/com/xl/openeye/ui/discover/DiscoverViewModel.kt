@@ -2,15 +2,45 @@ package com.xl.openeye.ui.discover
 
 import androidx.lifecycle.viewModelScope
 import com.xl.openeye.repository.DataRepository
+import com.xl.openeye.state.ViewEvent
 import com.xl.openeye.state.ViewState
 import com.xl.xl_base.base.ReduxViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DiscoverViewModel @Inject constructor(var repository: DataRepository) :
     ReduxViewModel<ViewState>(ViewState(isFirst = true)) {
+
+    private val pendingActions = Channel<ViewEvent>(Channel.BUFFERED)
+
+    init {
+        viewModelScope.launch {
+            pendingActions.consumeAsFlow().collect { action ->
+                when (action) {
+                    ViewEvent.RefreshFollow -> getFollow("0")
+                    ViewEvent.RefreshType -> getType()
+                    ViewEvent.RefreshToppoc -> getToppoc(0)
+                    ViewEvent.RefreshNewInfo -> getNewInfo(0)
+                    ViewEvent.RefreshRecommend -> getRecommend("1640770607000")
+
+                }
+            }
+        }
+    }
+
+    fun submitAction(action: ViewEvent) {
+        viewModelScope.launch {
+            if (!pendingActions.isClosedForReceive) {
+                pendingActions.send(action)
+            }
+        }
+    }
+
 
     fun getFollow(num: String) {
         setState {

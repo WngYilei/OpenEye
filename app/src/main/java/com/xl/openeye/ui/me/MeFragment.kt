@@ -2,7 +2,6 @@ package com.xl.openeye.ui.me
 
 import android.app.Activity
 import android.os.Bundle
-import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
@@ -18,10 +17,6 @@ class MeFragment : BaseFragment<MeFragmentBinding>(MeFragmentBinding::inflate) {
     companion object {
         fun newInstance() = MeFragment()
     }
-
-    private val viewModel: MeViewModel by viewModels()
-
-
     override fun onFragmentCreate(savedInstanceState: Bundle?) {
 
         Glide.with(this).load(R.mipmap.logo).apply(RequestOptions.bitmapTransform(CircleCrop()))
