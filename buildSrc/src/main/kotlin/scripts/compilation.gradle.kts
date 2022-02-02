@@ -2,7 +2,6 @@ package scripts
 
 plugins { id("com.android.application") }
 
-
 android {
     compileSdkVersion(AndroidSdk.compile)
 

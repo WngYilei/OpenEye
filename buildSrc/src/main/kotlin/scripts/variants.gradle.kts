@@ -2,7 +2,6 @@ package scripts
 
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
 
-
 plugins { id("com.android.application") }
 
 private object BuildTypes {
@@ -41,10 +40,17 @@ android {
 
         maybeCreate(BuildTypes.RELEASE).apply {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
             signingConfig = signingConfigs.getByName("release")
 
             applicationVariants.all {
+
+                println(this)
+                println(this.outputs)
+
                 this.outputs.all {
                     if (this is ApkVariantOutputImpl) {
                         this.outputFileName = "OpenEye_${defaultConfig.versionName}_release.apk"

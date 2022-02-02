@@ -82,6 +82,10 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
 
         viewModel.state.collectHandlerFlow(this) { state ->
 
+            state.rankingInfo?.let {
+
+            }
+
             state.homeInfo?.let { it ->
                 viewBinding.smartRefresh.finishRefresh()
                 viewBinding.smartRefresh.finishLoadMore()

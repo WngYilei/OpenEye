@@ -28,8 +28,6 @@ class HomeViewModel @Inject constructor(private val repository: DataRepository) 
         }
     }
 
-
-
     fun submitAction(action: ViewEvent) {
         viewModelScope.launch {
             if (!pendingActions.isClosedForReceive) {
