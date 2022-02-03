@@ -8,6 +8,7 @@ plugins {
     // 内部插件
     id(ScriptPlugins.variants)
     id(ScriptPlugins.compilation)
+
 }
 
 dependencies {

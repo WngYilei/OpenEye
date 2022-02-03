@@ -15,6 +15,7 @@ import com.xl.openeye.itemcell.BannerItem
 import com.xl.openeye.itemcell.HomeVideoItem
 import com.xl.openeye.itemcell.TextHeaderItem
 import com.xl.openeye.state.ViewEvent
+import com.xl.openeye.ui.search.SearchActivity
 import com.xl.openeye.ui.video.VideoDetailActivity
 import com.xl.xl_base.adapter.image.ImageLoader
 import com.xl.xl_base.adapter.item.ItemCell
@@ -39,7 +40,7 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
 
         viewBinding.titlebar.setOnTitleBarListener(object : OnTitleBarListener {
             override fun onRightClick(titleBar: TitleBar?) {
-                Log.e("TAG", "onRightClick: ")
+                goActivity(SearchActivity::class.java)
             }
         })
 

@@ -6,7 +6,7 @@ object Kotlin {
 }
 
 object AndroidSdk {
-    const val min = 25
+    const val min = 26
     const val compile = 31
     const val target = 31
 }

@@ -32,10 +32,13 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.discover.special.SpecialDetailActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ui.video.VideoDetailActivity"
-            android:exported="true" />
+            android:exported="false" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
