@@ -16,9 +16,7 @@ import com.xl.openeye.itemcell.SearchItem
 import com.xl.openeye.ui.video.VideoDetailActivity
 import com.xl.xl_base.adapter.image.ImageLoader
 import com.xl.xl_base.adapter.item.ItemCell
-import com.xl.xl_base.adapter.recycler.AdapterConfig
-import com.xl.xl_base.adapter.recycler.RecyclerAdapter
-import com.xl.xl_base.adapter.recycler.createAdapter
+import com.xl.xl_base.adapter.recycler.*
 import com.xl.xl_base.base.BaseActivity
 import com.xl.xl_base.tool.ktx.collectHandlerFlow
 import com.xl.xl_base.tool.ktx.goActivity
@@ -28,12 +26,12 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchActivity : BaseActivity<ActivitySearchBinding>(ActivitySearchBinding::inflate) {
 
     val viewModel: SearchViewModel by viewModels()
-    lateinit var recyclerAdapter: RecyclerAdapter
+    private lateinit var recyclerAdapter: StableAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
-        recyclerAdapter = createAdapter {
+        recyclerAdapter = createStableAdapter {
             imageLoader = ImageLoader(this@SearchActivity)
             onDetailClickCallback { _, _, value ->
                 App.data = value as Data
@@ -61,13 +59,17 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>(ActivitySearchBinding
         viewModel.state.collectHandlerFlow(this) {
             it.searchInfo?.let {
                 val items = mutableListOf<ItemCell>()
-                it.itemList.forEach {
-                    items.add(SearchItem(it))
+                it.itemList.forEach { item ->
+                    item.data.cover?.let {
+                        items.add(SearchItem(item))
+                    }
                 }
                 items.size.let { it1 ->
-                    recyclerAdapter.submitList(it1, items)
+                    recyclerAdapter.submitList(it1, items, true)
                 }
+
             }
+
         }
     }
 }

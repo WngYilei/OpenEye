@@ -21,8 +21,6 @@ class SearchItem(var item: Item) : ItemCell {
         override fun bind(itemCell: ItemCell, payloads: MutableList<Any>) {
             val cell = itemCell as SearchItem
             support.imageLoader?.display(itemView.item_search_img, cell.item.data.cover?.feed)
-            itemView.item_search_video_time.text =
-                DateUtil.format(cell.item.data.duration * 1000.toLong(), "HH:mm")
             itemView.item_search_title.text = cell.item.data.title
             itemView.item_search_img.setOnClickListener {
                 support.detailClickCallback?.invoke(layoutPosition, 0, cell.item.data)
