@@ -22,7 +22,7 @@ class DiscoverViewModel @Inject constructor(var repository: DataRepository) :
         viewModelScope.launch {
             pendingActions.consumeAsFlow().collect { action ->
                 when (action) {
-                    ViewEvent.RefreshFollow -> getFollow("0")
+                    ViewEvent.RefreshFollow -> getFollow()
                     ViewEvent.RefreshType -> getType()
                     ViewEvent.RefreshToppoc -> getToppoc(0)
                     ViewEvent.RefreshNewInfo -> getNewInfo(0)
@@ -42,14 +42,14 @@ class DiscoverViewModel @Inject constructor(var repository: DataRepository) :
     }
 
 
-    fun getFollow(num: String) {
+    fun getFollow() {
         setState {
             copy(loading = true, refresh = true, homeInfo = null)
         }
         viewModelScope.launch {
-            val data = repository.getFollow(num)
+            val data = repository.getFollow("0")
             setState {
-                copy(loading = false, refresh = num == "0", followInfo = data, homeInfo = null)
+                copy(loading = false, followInfo = data, homeInfo = null)
             }
         }
     }

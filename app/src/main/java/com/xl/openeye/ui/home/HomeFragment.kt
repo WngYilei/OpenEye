@@ -32,7 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::inflate) {
 
     private val viewModel by viewModels<HomeViewModel>()
-
+    private lateinit var bannerAdapter: StableAdapter
     private lateinit var recyclerAdapter: StableAdapter
     private var date: String = ""
     private var num: String = "1"
@@ -65,9 +65,17 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
             }
         }
 
+        bannerAdapter = createStableAdapter {
+            imageLoader = ImageLoader(this@HomeFragment)
+            onDetailClickCallback { _, _, value ->
+                val data = value as Data
+                App.data = data
+                goActivity(VideoDetailActivity::class.java)
+            }
+        }
 
         viewBinding.recycle.apply {
-            adapter = AdapterConfig.createNo(recyclerAdapter)
+            adapter = AdapterConfig.createNo(bannerAdapter, recyclerAdapter)
             layoutManager =
                 LinearLayoutManager(context).apply {
                     orientation = LinearLayoutManager.VERTICAL
@@ -83,10 +91,6 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
 
         viewModel.state.collectHandlerFlow(this) { state ->
 
-            state.rankingInfo?.let {
-
-            }
-
             state.homeInfo?.let { it ->
                 viewBinding.smartRefresh.finishRefresh()
                 viewBinding.smartRefresh.finishLoadMore()
@@ -95,16 +99,19 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
                 date = map["date"]!!
                 num = map["num"]!!
                 val items = mutableListOf<ItemCell>()
-                if (state.refresh) {
-                    items.add(
-                        BannerItem(
-                            activity as AppCompatActivity,
-                            it.issueList[0].itemList
-                        ),
-                    )
-                    items.add(TextHeaderItem("开眼看世界"))
 
-                }
+
+                val itemBanner = mutableListOf<ItemCell>()
+                itemBanner.add(
+                    BannerItem(
+                        activity as AppCompatActivity,
+                        it.issueList[0].itemList
+                    )
+                )
+                itemBanner.add(TextHeaderItem("开眼看世界"))
+                bannerAdapter.submitList(itemBanner.size, itemBanner, true)
+
+
                 it.issueList[0].itemList.forEach {
                     if (it.type == "video") {
                         items.add(HomeVideoItem(it.data))

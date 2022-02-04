@@ -6,21 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.discover.flow.FllowFragment">
 
-
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/smartRefresh"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.xl.xl_base.widget.LottieHeader
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false" />
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        android:clipToPadding="false" />
 </FrameLayout>
