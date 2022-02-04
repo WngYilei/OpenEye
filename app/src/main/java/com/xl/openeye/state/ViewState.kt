@@ -14,5 +14,6 @@ data class ViewState(
     var recommendInfo: RecommendInfo? = null,
     var rankingInfo: RankingInfo? = null,
     var videoRecommendInfo: VideoRecommendInfo? = null,
-    var specialDetailInfo: SpecialDetailInfo? = null
+    var specialDetailInfo: SpecialDetailInfo? = null,
+    var searchInfo: SearchInfo? = null
 )

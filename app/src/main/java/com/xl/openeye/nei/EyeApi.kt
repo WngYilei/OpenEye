@@ -53,4 +53,7 @@ interface EyeApi {
     @GET("/api/v3/lightTopics/internal/{id}")
     suspend fun getSpecialDetail(@Path("id") id: String): SpecialDetailInfo
 
+
+    @GET("/api/v1/search")
+    suspend fun getSearch(@Query("query") query: String) :SearchInfo
 }

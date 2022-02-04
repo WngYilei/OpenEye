@@ -25,4 +25,6 @@ class DataRepository @Inject constructor(private val service: EyeApi) : BaseRepo
     suspend fun getVideoRecommend(id: String) = service.getVideoRecommend(id)
 
     suspend fun getSpecialDetail(id: String) = service.getSpecialDetail(id)
+
+    suspend fun getSearch(query: String) = service.getSearch(query)
 }
