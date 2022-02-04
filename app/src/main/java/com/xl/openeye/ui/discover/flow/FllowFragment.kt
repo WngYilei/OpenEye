@@ -33,7 +33,6 @@ class FllowFragment : BaseFragment<FragmentFllowBinding>(FragmentFllowBinding::i
 
     val viewModel: DiscoverViewModel by viewModels()
 
-
     private lateinit var recyclerAdapter: RecyclerAdapter
     override fun onFragmentCreate(savedInstanceState: Bundle?) {
 

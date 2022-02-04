@@ -87,4 +87,9 @@ object Libraries {
     const val daggercompiler = "com.google.dagger:hilt-android-compiler:2.36"
     const val hiltcompiler = "androidx.hilt:hilt-compiler:1.0.0"
     const val base = "com.xl:base:1.1.6"
+
+    const val legacy ="androidx.legacy:legacy-support-v4:1.0.0"
+    const val banner = "io.github.youth5201314:banner:2.2.2"
+    const val title ="com.github.getActivity:TitleBar:9.3"
+    const val player = "cn.jzvd:jiaozivideoplayer:7.7.0"
 }
