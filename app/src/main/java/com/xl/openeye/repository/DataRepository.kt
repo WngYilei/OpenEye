@@ -8,7 +8,7 @@ import javax.inject.Inject
 class DataRepository @Inject constructor(private val service: EyeApi) : BaseRepository() {
     suspend fun getHome(index: String) = service.getHomeData(index)
 
-    suspend fun getNextHome(date: String, num: String) = service.getNextHomePage(date, num)
+    suspend fun getNextHome(date: String) = service.getNextHomePage(date)
 
     suspend fun getFollow(num: String) = service.getFollow(start = num)
 

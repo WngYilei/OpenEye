@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_special_detail.view.*
 
 
 class SpecialDetailItem(var data: SpecialDetailData) : ItemCell {
-    override fun itemContent() = "SpecialDetailItem"
+    override fun itemContent() = "$data"
 
     override fun itemId() = "$data"
     override fun layoutResId() = R.layout.item_special_detail

@@ -10,7 +10,7 @@ import com.xl.xl_base.tool.ktx.toPx
 import kotlinx.android.synthetic.main.item_special.view.*
 
 class SpecialItem(var toppocItem: ToppocItem) : ItemCell {
-    override fun itemContent() = "SpecialItem"
+    override fun itemContent() = "$toppocItem"
     override fun itemId() = "$toppocItem"
     override fun layoutResId() = R.layout.item_special
     override fun onCreateViewHolder(itemView: View, support: RecyclerSupport): RecyclerVH =

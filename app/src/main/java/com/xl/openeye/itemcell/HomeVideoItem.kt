@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_home_video.view.*
 
 class HomeVideoItem(val data: Data) : ItemCell {
     override fun itemContent() = "$data"
-    override fun itemId() = "HomeVideoItem"
+    override fun itemId() = "$data"
 
     override fun layoutResId(): Int = R.layout.item_home_video
 

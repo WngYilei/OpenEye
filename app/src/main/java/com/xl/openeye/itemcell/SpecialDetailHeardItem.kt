@@ -9,7 +9,7 @@ import com.xl.xl_base.adapter.recycler.RecyclerVH
 import kotlinx.android.synthetic.main.item_special_heard_detail.view.*
 
 class SpecialDetailHeardItem(var specialDetailInfo: SpecialDetailInfo) : ItemCell {
-    override fun itemContent() = "SpecialDetailHeardItem"
+    override fun itemContent() = "$specialDetailInfo"
 
     override fun itemId() = "$specialDetailInfo"
 

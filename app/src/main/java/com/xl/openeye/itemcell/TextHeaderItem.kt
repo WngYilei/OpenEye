@@ -8,7 +8,7 @@ import com.xl.xl_base.adapter.recycler.RecyclerVH
 import kotlinx.android.synthetic.main.item_textheader.view.*
 
 class TextHeaderItem(val text: String) : ItemCell {
-    override fun itemContent() = "TextHeaderItem"
+    override fun itemContent() = "$text"
 
     override fun itemId() = "$text"
 

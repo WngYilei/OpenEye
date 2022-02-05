@@ -10,7 +10,7 @@ import com.xl.xl_base.tool.util.DateUtil
 import kotlinx.android.synthetic.main.item_search.view.*
 
 class SearchItem(var item: Item) : ItemCell {
-    override fun itemContent() = "SearchItem"
+    override fun itemContent() ="$item"
     override fun itemId() = "$item"
     override fun layoutResId() = R.layout.item_search
     override fun onCreateViewHolder(itemView: View, support: RecyclerSupport) =

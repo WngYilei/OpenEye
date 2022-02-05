@@ -51,13 +51,13 @@ class HomeViewModel @Inject constructor(private val repository: DataRepository) 
         }
     }
 
-    fun getNextHome(date: String, num: String) {
+    fun getNextHome(date: String) {
         setState {
             copy(loading = true, homeInfo = null)
         }
         viewModelScope.launch {
             setState { copy(loading = true) }
-            val data = repository.getNextHome(date, num)
+            val data = repository.getNextHome(date)
             setState {
                 copy(loading = true, refresh = false, homeInfo = data)
             }

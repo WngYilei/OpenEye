@@ -12,7 +12,7 @@ interface EyeApi {
     suspend fun getHomeData(@Query("num") num: String): HomeInfo
 
     @GET("/api/v2/feed")
-    suspend fun getNextHomePage(@Query("date") data: String, @Query("num") num: String): HomeInfo
+    suspend fun getNextHomePage(@Query("date") data: String, @Query("num") num: String = "1"): HomeInfo
 
 
     @GET("/api/v4/tabs/follow")

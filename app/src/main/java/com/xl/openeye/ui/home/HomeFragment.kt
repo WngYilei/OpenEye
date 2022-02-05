@@ -35,7 +35,6 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
     private lateinit var bannerAdapter: StableAdapter
     private lateinit var recyclerAdapter: StableAdapter
     private var date: String = ""
-    private var num: String = "1"
     override fun onFragmentCreate(savedInstanceState: Bundle?) {
 
         viewBinding.titlebar.setOnTitleBarListener(object : OnTitleBarListener {
@@ -48,11 +47,10 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
 
         viewBinding.smartRefresh.onSmartRefreshCallback {
             onRefresh {
-                num = "0"
                 viewModel.submitAction(ViewEvent.Refresh)
             }
             onLoadMore {
-                viewModel.getNextHome(date, num)
+                viewModel.getNextHome(date)
             }
         }
 
@@ -97,7 +95,6 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
 
                 val map = StringUtils.getUrl(it.nextPageUrl)
                 date = map["date"]!!
-                num = map["num"]!!
                 val items = mutableListOf<ItemCell>()
 
 
@@ -119,8 +116,8 @@ class HomeFragment : BaseFragment<HomeFragmentBinding>(HomeFragmentBinding::infl
                         items.add(TextHeaderItem(it.data.text))
                     }
                 }
-                items.size.let { it1 ->
-                    recyclerAdapter.submitList(it1, items, state.refresh)
+                it.issueList[0].itemList.size?.let {
+                    recyclerAdapter.submitList(it, items, state.refresh)
                 }
             }
         }
