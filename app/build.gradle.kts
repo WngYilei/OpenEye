@@ -21,5 +21,4 @@ dependencies {
     implementation(Libraries.banner)
     implementation(Libraries.title)
     implementation(Libraries.player)
-
 }
