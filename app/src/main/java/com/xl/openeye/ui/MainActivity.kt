@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,24 +24,28 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.xl.openeye.ui.home.HomeViewModel
 import com.xl.openeye.ui.ui.theme.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ComposeActivity : ComponentActivity() {
 
+    val modle by viewModels<HomeViewModel>()
+
     @RequiresApi(Build.VERSION_CODES.M)
     @OptIn(ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen()
+            MainScreen(modle)
         }
     }
 }
@@ -49,22 +54,21 @@ val title = mutableStateOf("")
 
 
 @ExperimentalMaterialApi
-@Preview(showBackground = true)
 @Composable
-fun MainScreen() {
+fun MainScreen(viewModel: HomeViewModel) {
     val navController = rememberNavController()
     Scaffold(topBar = { TitleBar() }, bottomBar = { BottomNavigationBar(navController) }) {
-        Navigation(navController = navController)
+        Navigation(navController = navController,  viewModel )
     }
 }
 
 
 @Composable
-fun Navigation(navController: NavHostController) {
+fun Navigation(navController: NavHostController,viewModel: HomeViewModel) {
     NavHost(navController, startDestination = NavigationItem.Home.route) {
         composable(NavigationItem.Home.route) {
             title.value = "主页"
-            HomeScreen()
+            HomeScreen(viewModel = viewModel)
         }
         composable(NavigationItem.Discovery.route) {
             title.value = "发现"
