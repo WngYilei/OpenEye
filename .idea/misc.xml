@@ -5,7 +5,10 @@
       <map>
         <entry key="app/src/main/res/drawable/bg_circle.xml" value="0.46296296296296297" />
         <entry key="app/src/main/res/drawable/bg_video_time.xml" value="0.46296296296296297" />
+        <entry key="app/src/main/res/drawable/ic_book.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/selector_main_tab_home.xml" value="0.1895" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5651041666666666" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.14990942028985507" />
         <entry key="app/src/main/res/layout/discover_fragment.xml" value="0.39166666666666666" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.20652173913043478" />
         <entry key="app/src/main/res/layout/hot_fragment.xml" value="0.39166666666666666" />

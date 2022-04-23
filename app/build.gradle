@@ -1,0 +1,80 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        minSdk 28
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion "1.0.1"
+    }
+    buildFeatures {
+        compose  true
+    }
+}
+
+
+
+
+dependencies {
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+    implementation "com.google.dagger:hilt-android:2.36"
+    implementation "com.xl:base:1.1.6"
+    implementation("androidx.compose.ui:ui:1.0.1")
+    implementation("androidx.compose.material:material:1.0.1")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.0.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
+    implementation("androidx.activity:activity-compose:1.3.1")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.0.1")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.0.1")
+    implementation("androidx.navigation:navigation-compose:2.4.0-beta01")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.0")
+
+    kapt "com.google.dagger:hilt-android-compiler:2.36"
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
+    implementation "com.google.dagger:hilt-android:2.36"
+
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation "io.github.youth5201314:banner:2.2.2"
+    implementation "cn.jzvd:jiaozivideoplayer:7.7.0"
+}

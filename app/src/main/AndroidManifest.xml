@@ -31,17 +31,15 @@
         android:theme="@style/Theme.OpenEye"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.discover.special.SpecialDetailActivity"
-            android:exported="false" />
+            android:name=".ui.MainActivity2"
+            android:exported="true"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/Theme.OpenEye" />
         <activity
-            android:name=".ui.video.VideoDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.search.SearchActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.MainActivity"
-            android:exported="true">
+            android:name=".ui.ComposeActivity"
+            android:exported="true"
+            android:label="@string/title_activity_compose"
+            android:theme="@style/Theme.OpenEye">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
