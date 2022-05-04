@@ -24,6 +24,7 @@ class HomeViewModel @Inject constructor(private val repository: DataRepository) 
             pendingActions.consumeAsFlow().collect { action ->
                 when (action) {
                     ViewEvent.Refresh -> getHome(0)
+                    else -> {}
                 }
             }
         }
@@ -39,16 +40,14 @@ class HomeViewModel @Inject constructor(private val repository: DataRepository) 
 
 
     fun getHome(index: Int) {
-        Log.e("TAG", "getHome: "+index)
         setState {
             copy(loading = true, refresh = true, homeInfo = null)
         }
         viewModelScope.launch {
             setState { copy(loading = true) }
             val data = repository.getHome(index.toString())
-            Log.e("TAG", "getHome: " + data)
             setState {
-                copy(loading = true, refresh = true, homeInfo = data)
+                copy(loading = true, refresh = false, homeInfo = data)
             }
         }
     }

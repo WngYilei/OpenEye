@@ -1,5 +1,6 @@
 package com.xl.openeye.ui
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -31,6 +32,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.xl.openeye.ui.home.HomeViewModel
 import com.xl.openeye.ui.ui.theme.*
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,6 +56,7 @@ class ComposeActivity : ComponentActivity() {
 val title = mutableStateOf("")
 
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalMaterialApi
 @Composable
 fun MainScreen(viewModel: HomeViewModel) {
@@ -124,19 +128,7 @@ fun BottomNavigationBar(navController: NavController) {
         items.forEach { item ->
             BottomNavigationItem(
                 icon = {
-                    if (item.messageCount != 0) {
-                        BadgeBox(backgroundColor = Color.Red,
-                            contentColor = Color.White,
-                            badgeContent = { Text(text = "8") }
-                        ) {
-                            Icon(
-                                ImageVector.Companion.vectorResource(id = item.icon),
-                                contentDescription = item.title
-                            )
-                        }
-                    } else {
-                        Icon(painterResource(id = item.icon), contentDescription = item.title)
-                    }
+                    Icon(painterResource(id = item.icon), contentDescription = item.title)
                 },
                 label = { Text(text = item.title) },
                 selectedContentColor = Color.Black,

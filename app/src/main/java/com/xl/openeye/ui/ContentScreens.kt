@@ -1,34 +1,30 @@
 package com.xl.openeye.ui
 
 import android.util.Log
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.Button
+
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.compose.rememberImagePainter
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.xl.openeye.dataclass.Item
 import com.xl.openeye.state.ViewEvent
-import com.xl.openeye.ui.home.Banner
-import com.xl.openeye.ui.home.BannerData
-import com.xl.openeye.ui.home.HomeViewModel
-import com.xl.openeye.ui.search.SearchViewModel
+import com.xl.openeye.ui.home.*
 
 import com.xl.openeye.ui.ui.theme.Purple200
+import com.xl.xl_base.tool.util.StringUtils
 
 
 @Composable
@@ -90,31 +86,95 @@ fun ProfileScreen() {
 }
 
 
+@Composable
+private fun LoadingContent(
+    empty: Boolean,
+    emptyContent: @Composable () -> Unit,
+    loading: Boolean,
+    onRefresh: () -> Unit,
+    content: @Composable () -> Unit
+) {
+    if (empty) {
+        emptyContent()
+    } else {
+        SwipeRefresh(
+            state = rememberSwipeRefreshState(loading),
+            onRefresh = onRefresh,
+            content = content,
+
+            )
+    }
+}
+
+
 @OptIn(ExperimentalPagerApi::class, coil.annotation.ExperimentalCoilApi::class)
 @Composable
 fun HomeScreen(viewModel: HomeViewModel) {
-    var data = viewModel.state.collectAsState()
-    Button(onClick = { viewModel.getHome(1) }) {
-        Text(text = "获取数据")
+
+    val uiState = viewModel.state.collectAsState()
+
+    val isRefresh = remember { mutableStateOf(false) }
+
+    val data = remember { mutableListOf<Item>() }
+
+    isRefresh.value = uiState.value.refresh
+
+    uiState.value.homeInfo?.let {
+        data.addAll(it.issueList[0].itemList)
     }
-    data.value.homeInfo?.let {
-        var url = it.issueList[0].itemList[0].data.image;
-        Log.e("TAG", "HomeScreen: " + url)
+
+    LoadingContent(empty = data.size == 0, emptyContent = {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .wrapContentSize(Alignment.Center)
+        ) {
+            CircularProgressIndicator()
+        }
+
+        viewModel.submitAction(ViewEvent.Refresh)
+    }, loading = isRefresh.value, onRefresh = {
+        viewModel.submitAction(ViewEvent.Refresh)
+        isRefresh.value = true
+        data.clear()
+    }) {
         val bannerImages = arrayListOf<BannerData>()
-        bannerImages.add(BannerData(url, ""))
-        bannerImages.add(BannerData(url, ""))
-        bannerImages.add(BannerData(url, ""))
+
+        for (imageData in data) {
+            if (bannerImages.size > 5) break
+            imageData.data.image?.let {
+                bannerImages.add(BannerData(it, ""))
+                bannerImages.add(BannerData(it, ""))
+                bannerImages.add(BannerData(it, ""))
+            }
+        }
 
         LazyColumn {
-            itemsIndexed(data.value.homeInfo!!.issueList) { index, item ->
+            itemsIndexed(data) { index, item ->
                 if (index == 0) {
                     Banner(list = bannerImages)
                 } else {
+                    if (item.type == "video") {
+                        HomeItemVideo(data = item.data) {
+                            Log.e("TAG", "点击点击: " + it.playUrl)
+                        }
+                    } else {
+                        HomeItemText(data = item.data.text ?: "空数据")
+                    }
+                }
+                if (index == data.size - 1) {
+                    try {
+                        val map = StringUtils.getUrl(uiState.value.homeInfo!!.nextPageUrl)
+                        viewModel.getNextHome(map["date"]!!)
+                    } catch (e: Exception) {
 
+                    }
                 }
             }
         }
+
     }
+
 }
 
 

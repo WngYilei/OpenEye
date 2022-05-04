@@ -1,4 +1,5 @@
 package com.xl.openeye.ui.home
+
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
@@ -44,7 +45,9 @@ fun Banner(
 ) {
 
     Box(
-        modifier = Modifier.background(MaterialTheme.colors.background).fillMaxWidth()
+        modifier = Modifier
+            .background(MaterialTheme.colors.background)
+            .fillMaxWidth()
             .height(220.dp)
     ) {
 
@@ -58,15 +61,12 @@ fun Banner(
             )
         } else {
             val pagerState = rememberPagerState(
-                //总页数
-                pageCount = list.size,
-                //预加载的个数
-                initialOffscreenLimit = 1,
-                //是否无限循环
-                infiniteLoop = true,
+
                 //初始页面
-                initialPage = 0
-            )
+                initialPage = 0,
+
+
+                )
 
             //监听动画执行
             var executeChangePage by remember { mutableStateOf(false) }
@@ -77,45 +77,48 @@ fun Banner(
                 if (pagerState.pageCount > 0) {
                     delay(timeMillis)
                     //这里直接+1就可以循环，前提是infiniteLoop == true
-                    pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                    pagerState.animateScrollToPage(pagerState.currentPage)
                 }
             }
 
             HorizontalPager(
                 state = pagerState,
-                modifier = Modifier.pointerInput(pagerState.currentPage) {
-                    awaitPointerEventScope {
-                        while (true) {
-                            //PointerEventPass.Initial - 本控件优先处理手势，处理后再交给子组件
-                            val event = awaitPointerEvent(PointerEventPass.Initial)
-                            //获取到第一根按下的手指
-                            val dragEvent = event.changes.firstOrNull()
-                            when {
-                                //当前移动手势是否已被消费
-                                dragEvent!!.positionChangeConsumed() -> {
-                                    return@awaitPointerEventScope
-                                }
-                                //是否已经按下(忽略按下手势已消费标记)
-                                dragEvent.changedToDownIgnoreConsumed() -> {
-                                    //记录下当前的页面索引值
-                                    currentPageIndex = pagerState.currentPage
-                                }
-                                //是否已经抬起(忽略按下手势已消费标记)
-                                dragEvent.changedToUpIgnoreConsumed() -> {
-                                    //当页面没有任何滚动/动画的时候pagerState.targetPage为null，这个时候是单击事件
-                                    if (pagerState.targetPage == null) return@awaitPointerEventScope
-                                    //当pageCount大于1，且手指抬起时如果页面没有改变，就手动触发动画
-                                    if (currentPageIndex == pagerState.currentPage && pagerState.pageCount > 1) {
-                                        executeChangePage = !executeChangePage
+                count = list.size,
+                modifier = Modifier
+                    .pointerInput(pagerState.currentPage) {
+                        awaitPointerEventScope {
+                            while (true) {
+                                //PointerEventPass.Initial - 本控件优先处理手势，处理后再交给子组件
+                                val event = awaitPointerEvent(PointerEventPass.Initial)
+                                //获取到第一根按下的手指
+                                val dragEvent = event.changes.firstOrNull()
+                                when {
+                                    //当前移动手势是否已被消费
+                                    dragEvent!!.positionChangeConsumed() -> {
+                                        return@awaitPointerEventScope
+                                    }
+                                    //是否已经按下(忽略按下手势已消费标记)
+                                    dragEvent.changedToDownIgnoreConsumed() -> {
+                                        //记录下当前的页面索引值
+                                        currentPageIndex = pagerState.currentPage
+                                    }
+                                    //是否已经抬起(忽略按下手势已消费标记)
+                                    dragEvent.changedToUpIgnoreConsumed() -> {
+                                        //当页面没有任何滚动/动画的时候pagerState.targetPage为null，这个时候是单击事件
+                                        if (pagerState.targetPage == null) return@awaitPointerEventScope
+                                        //当pageCount大于1，且手指抬起时如果页面没有改变，就手动触发动画
+                                        if (currentPageIndex == pagerState.currentPage && pagerState.pageCount > 1) {
+                                            executeChangePage = !executeChangePage
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                }
                     .clickable(onClick = { onClick(list[pagerState.currentPage].linkUrl) })
                     .fillMaxSize(),
-            ) { page ->
+
+                ) { page ->
                 Image(
                     painter = rememberImagePainter(list[page].imageUrl),
                     modifier = Modifier.fillMaxSize(),
@@ -125,7 +128,8 @@ fun Banner(
             }
 
             Box(
-                modifier = Modifier.align(indicatorAlignment)
+                modifier = Modifier
+                    .align(indicatorAlignment)
                     .padding(bottom = 6.dp, start = 6.dp, end = 6.dp)
             ) {
 
@@ -144,13 +148,18 @@ fun Banner(
                             if (pagerState.currentPage == i) MaterialTheme.colors.primary else Color.Gray
 
                         Box(
-                            modifier = Modifier.clip(CircleShape).background(color)
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .background(color)
                                 //当size改变的时候以动画的形式改变
-                                .animateContentSize().size(size)
+                                .animateContentSize()
+                                .size(size)
                         )
                         //指示点间的间隔
                         if (i != list.lastIndex) Spacer(
-                            modifier = Modifier.height(0.dp).width(4.dp)
+                            modifier = Modifier
+                                .height(0.dp)
+                                .width(4.dp)
                         )
                     }
                 }
