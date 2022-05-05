@@ -30,7 +30,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OpenEye"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".ui.video.VideoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_video"
+            android:theme="@style/Theme.OpenEye" />
         <activity
             android:name=".ui.ComposeActivity"
             android:exported="true"

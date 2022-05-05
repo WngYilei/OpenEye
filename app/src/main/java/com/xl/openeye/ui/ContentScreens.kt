@@ -1,5 +1,6 @@
 package com.xl.openeye.ui
 
+import android.content.Intent
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -12,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -19,11 +21,13 @@ import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
+import com.xl.openeye.App
 import com.xl.openeye.dataclass.Item
 import com.xl.openeye.state.ViewEvent
 import com.xl.openeye.ui.home.*
 
 import com.xl.openeye.ui.ui.theme.Purple200
+import com.xl.openeye.ui.video.VideoActivity
 import com.xl.xl_base.tool.util.StringUtils
 
 
@@ -110,7 +114,7 @@ private fun LoadingContent(
 @OptIn(ExperimentalPagerApi::class, coil.annotation.ExperimentalCoilApi::class)
 @Composable
 fun HomeScreen(viewModel: HomeViewModel) {
-
+    val context = LocalContext.current
     val uiState = viewModel.state.collectAsState()
 
     val isRefresh = remember { mutableStateOf(false) }
@@ -156,7 +160,8 @@ fun HomeScreen(viewModel: HomeViewModel) {
                 } else {
                     if (item.type == "video") {
                         HomeItemVideo(data = item.data) {
-                            Log.e("TAG", "点击点击: " + it.playUrl)
+                            App.data = it
+                            context.startActivity(Intent(context, VideoActivity::class.java))
                         }
                     } else {
                         HomeItemText(data = item.data.text ?: "空数据")
