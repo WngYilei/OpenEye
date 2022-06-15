@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DiscoverFragment : BaseFragment<DiscoverFragmentBinding>(DiscoverFragmentBinding::inflate) {
     private val fragments = arrayListOf<Fragment>()
-    private val tabs = arrayListOf("关注", "分类", "专题", "资讯", "推荐")
+    private val tabs = arrayListOf("关注关注", "分类分类", "专题", "资讯", "推荐")
 
     init {
         fragments.add(FllowFragment.newInstance())

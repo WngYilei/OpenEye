@@ -7,14 +7,17 @@
     tools:context=".ui.discover.DiscoverFragment">
 
 
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/white"
         app:tabBackground="@android:color/white"
         app:tabGravity="center"
         app:tabIndicatorColor="@android:color/black"
         app:tabIndicatorHeight="2dp"
+        app:tabIndicatorFullWidth="false"
         app:tabMode="scrollable"
         app:tabSelectedTextColor="@android:color/black"
         app:tabTextColor="@android:color/darker_gray" />
